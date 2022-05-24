@@ -108,7 +108,7 @@ const Home = () => {
           {users.map((user) => (
             <StyledTableRow key={user.id}>
               <StyledTableCell width="3%" component="th" scope="row">{user.id}</StyledTableCell>
-              <StyledTableCell width="17%" align="left">{user.name}</StyledTableCell>
+              <StyledTableCell width="17%" align="left">{user.username}</StyledTableCell>
               <StyledTableCell width="17%" align="left">{user.email}</StyledTableCell>
               <StyledTableCell width="17%" align="left">{user.gender}</StyledTableCell>
               <StyledTableCell width="17%" align="left">{user.mobile}</StyledTableCell>
