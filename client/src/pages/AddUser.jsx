@@ -8,7 +8,8 @@ import { useDispatch } from 'react-redux';
 
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 
 import { addUser } from '../redux/actions';
@@ -37,14 +38,27 @@ const AddUser = () => {
         let {name, value} = e.target;
         setState({...state, [name]: value})
     }
+    // const notify = () => toast("Plaese Enter All The Input field");
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const resolveAfter2Sec = new Promise(resolve => setTimeout(resolve, 2000));
         if(!username || !email || !gender || !mobile || !address){
-            setError("Plaese Enter All The Input field")
+            // setError("Plaese Enter All The Input field")
+            return toast.warn("Plaese Enter All The Input field")
         } else {
             dispatch(addUser(state))
-            navigate("/")
+            toast.promise(
+                resolveAfter2Sec,
+                {
+                  pending: 'User Add pending',
+                  success: 'User Added successfully👌',
+                  error: 'Promise rejected 🤯'
+                }
+            )
+            setTimeout(() => {
+                navigate("/")
+            }, 2000)
             setError("")
         }
     }
@@ -59,6 +73,11 @@ const AddUser = () => {
           <NavBar />
           {/* <Button onClick={()=>handlHome()} style={{width:"150px", marginTop:"20px"}} type="submit"  color="secondary" variant="outlined">Home Page</Button> */}
         <h2>Add User</h2>
+
+
+        {/* <button onClick={notify}>Notify!</button> */}
+
+        {/* <ToastContainer /> */}
         {error && <h2><Alert severity="error">{error}</Alert></h2>}
             <Box onSubmit={handleSubmit}
                 component="form"

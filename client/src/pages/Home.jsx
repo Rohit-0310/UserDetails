@@ -17,6 +17,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import NavBar from './NavBar';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -63,6 +67,7 @@ const Home = () => {
     const handleDelete = (id) => {
         if(window.confirm('Are you sure you want to delete this user?')){
             dispatch(deleteUser(id));
+            toast.success("User Deleted Successfully");
             
         }
     }
@@ -71,13 +76,34 @@ const Home = () => {
     //     navigate("/addUser")
     // }
 
-
     const handleEdit = (pid) => {
-        navigate(`/edit/${pid}`)
+    const resolveAfter2Sec = new Promise(resolve => setTimeout(resolve, 1000));
+        toast.promise(
+            resolveAfter2Sec,
+            {
+              pending: 'Loading User Update Page',
+              success: 'Loading User Update Page success👌',
+              error: 'Promise rejected 🤯'
+            }
+        )
+        setTimeout(() => {
+            navigate(`/edit/${pid}`)
+          }, 1000)
     }
 
     const handleView = (pid) => {
-        navigate(`/userdetail/${pid}`)
+        const resolveAfter2Sec = new Promise(resolve => setTimeout(resolve, 1000));
+        toast.promise(
+            resolveAfter2Sec,
+            {
+              pending: 'Loading User Details Page',
+              success: 'Loading User Details Page success👌',
+              error: 'Promise rejected 🤯'
+            }
+        )
+        setTimeout(() => {
+            navigate(`/userdetail/${pid}`)
+          }, 1000)
     }
 
 
