@@ -84,7 +84,10 @@ const EditUser = () => {
 
     const handleInputCancle = () =>{
         if(window.confirm('Are you sure you want to cancel the Update?')){
-            navigate("/")            
+            toast.success("User Update Cancle")     
+            setTimeout(() => {
+                navigate("/")
+            }, 2000)
         }
     }
     // const handlHome = () => {
